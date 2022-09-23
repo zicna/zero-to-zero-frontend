@@ -1,17 +1,14 @@
-import React from 'react'
+import React, { useState } from 'react'
 import NavBar from './components/NavBar'
-// import { Route, Routes } from 'react-router'
-// import Home from './pages/Home'
-// import Login from './pages/Login'
-// import SignUp from './pages/SignUp'
 import MainRoutesContainer from './routes container/MainRoutesContainer'
 
 function App() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   return (
     <>
       <h1> Hello from Zero-to-Zero-frontend</h1>
-      <NavBar />
-      <MainRoutesContainer />
+      <NavBar isLoggedIn={isLoggedIn} />
+      <MainRoutesContainer setIsLoggedIn={setIsLoggedIn} />
     </>
   )
 }
