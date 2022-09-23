@@ -47,7 +47,6 @@ export default function Auth({ setIsLoggedIn }) {
     <div>
       <h2>{isLogin ? 'LOGIN' : 'SIGNUP'}</h2>
       <form action="" onSubmit={submitHandler}>
-        <legend>create new user</legend>
         <div>
           <label htmlFor="">email</label>
           <input type="email" value={email} onChange={emailChangeHandler} />
