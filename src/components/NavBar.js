@@ -11,11 +11,11 @@ export default function NavBar() {
           <NavLink to="/home">HOME</NavLink>
         </li>
         <li>
-          <NavLink to="/login">LOGIN</NavLink>
+          <NavLink to="/auth">LOGIN</NavLink>
         </li>
-        <li>
+        {/* <li>
           <NavLink to="/signup">SIGNUP</NavLink>
-        </li>
+        </li> */}
       </ul>
     </div>
   )

@@ -1,9 +1,14 @@
 import React from 'react'
 import { useState, useRef } from 'react'
 
-import { submitUser, LOGIN, SIGNUP } from '../helpers/fetchHelpers'
+import { submitUser} from '../helpers/fetchHelpers'
 
-export default function SignUp() {
+export const SIGNUP = 'signup'
+export const LOGIN = 'login'
+
+export default function Auth() {
+  const [isLogin, setIsLogin] = useState(true)
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
@@ -27,16 +32,24 @@ export default function SignUp() {
     const userObject = {
       user: { email, password, passwordConfirmation },
     }
-
-    submitUser(userObject, SIGNUP)
+    if (isLogin) {
+      // debugger
+      submitUser(userObject, LOGIN)
+    } else {
+      submitUser(userObject, SIGNUP)
+    }
 
     setEmail('')
     setPassword('')
     setPasswordConfirmation('')
   }
+
+  const changePurposeHandler = () => {
+    setIsLogin((prevState) => !prevState)
+  }
   return (
-    <React.Fragment>
-      <h2>SignUp</h2>
+    <div>
+      <h2>{isLogin ? 'LOGIN' : 'SIGNUP'}</h2>
       <form action="" onSubmit={submitHandler} ref={form}>
         <legend>create new user</legend>
         <div>
@@ -62,7 +75,12 @@ export default function SignUp() {
         <div>
           <input type="submit" value="SUBMIT" />
         </div>
+        <div>
+          <button onClick={changePurposeHandler}>
+            {isLogin ? 'SIGN UP' : 'LOGIN'} insted
+          </button>
+        </div>
       </form>
-    </React.Fragment>
+    </div>
   )
 }
