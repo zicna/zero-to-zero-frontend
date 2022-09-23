@@ -1,7 +1,7 @@
 import React from 'react'
 import { Routes, Route } from 'react-router'
 import Home from '../pages/Home'
-import Auth from '../components/Auth.js'
+import Auth from '../components/Auth/Auth.js'
 import LogOut from '../components/LogOut'
 import Profile from '../pages/Profile.js'
 

@@ -1,0 +1,56 @@
+.auth {
+  background-color: #ddd;
+  outline: 1px solid yellow;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  width: 95%;
+  max-width: 25rem;
+  margin: 3rem auto;
+}
+
+.auth label {
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.auth div {
+  margin-bottom: 1rem;
+}
+
+.actions {
+  padding-top: 1rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.actions button {
+  display: block;
+  max-width: 60%;
+  margin-bottom: 1rem;
+  cursor: pointer;
+}
+
+/* button[type='submit'] {
+  padding: .5rem 1.5rem;
+  border-radius: 8px;
+  
+} */
+.submit {
+  min-width: 7rem;
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  color: white;
+  font-weight: bolder;
+  background-color: #333;
+}
+
+.actions button:last-child {
+  background-color: #ddd;
+  color: blue;
+  border: none;
+  font-style: italic;
+  text-decoration: underline;
+}

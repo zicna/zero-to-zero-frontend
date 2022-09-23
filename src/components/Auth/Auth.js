@@ -1,7 +1,7 @@
 import React from 'react'
 import { useState } from 'react'
-
-import { submitUser, SIGNUP, LOGIN } from '../helpers/fetchHelpers'
+import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
+import styles from './auth.module.css'
 
 export default function Auth({ setIsLoggedIn }) {
   const [isLogin, setIsLogin] = useState(true)
@@ -44,36 +44,46 @@ export default function Auth({ setIsLoggedIn }) {
     setIsLogin((prevState) => !prevState)
   }
   return (
-    <div>
+    <div className={styles.auth}>
       <h2>{isLogin ? 'LOGIN' : 'SIGNUP'}</h2>
-      <form action="" onSubmit={submitHandler}>
+      <form onSubmit={submitHandler}>
         <div>
-          <label htmlFor="">email</label>
-          <input type="email" value={email} onChange={emailChangeHandler} />
+          <label htmlFor="email">email</label>
+          <input
+            id="email"
+            type="email"
+            value={email}
+            onChange={emailChangeHandler}
+            autoFocus
+          />
         </div>
         <div>
-          <label htmlFor="">password</label>
+          <label htmlFor="password">password</label>
           <input
+            id="password"
             type="password"
             value={password}
             onChange={passwordChangeHandler}
           />
         </div>
         <div>
-          <label htmlFor="">password confirmation</label>
+          <label htmlFor="password-confirmation">password confirmation</label>
           <input
+            id="password-confirmation"
             type="password"
             value={passwordConfirmation}
             onChange={passConChangeHandler}
           />
         </div>
-        <div>
-          <button>SUBMIT </button>
-        </div>
-        <div>
+        <div className={styles.actions}>
+          <button className={styles.submit} type="submit">
+            {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
+          </button>
           {/* default type for button is submit, so both buttons were submit buttons */}
           <button type="button" onClick={changePurposeHandler}>
-            {isLogin ? 'SIGN UP' : 'LOGIN'} insted
+            {isLogin
+              ? 'create new account'
+              : 'already have account, login insted'}
           </button>
         </div>
       </form>
