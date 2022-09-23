@@ -5,6 +5,8 @@ export const LOGIN = 'login'
 export const submitUser = async (user, action) => {
   try {
     console.log(user)
+    // !1. typo on URL=> fetch was sending request to app server with added URL passed to fetch
+    // ! POST http://localhost:3001/http//localhost:3000/login 404 (Not Found)
     const response = await fetch(`http://localhost:3000/${action}`, {
       method: 'POST',
       headers: {

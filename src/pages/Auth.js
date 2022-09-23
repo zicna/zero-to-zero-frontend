@@ -3,10 +3,7 @@ import { useState, useRef } from 'react'
 
 import { submitUser, SIGNUP, LOGIN } from '../helpers/fetchHelpers'
 
-// export const SIGNUP = 'signup'
-// export const LOGIN = 'login'
-
-export default function Auth() {
+export default function Auth({setIsLoggedIn}) {
   const [isLogin, setIsLogin] = useState(true)
 
   const [email, setEmail] = useState('')
@@ -35,8 +32,10 @@ export default function Auth() {
     }
     if (isLogin) {
       submitUser(userObject, LOGIN)
+      setIsLoggedIn(true)
     } else {
       submitUser(userObject, SIGNUP)
+      setIsLoggedIn(true)
     }
 
     setEmail('')
@@ -77,6 +76,7 @@ export default function Auth() {
           <button>SUBMIT </button>
         </div>
         <div>
+          {/* default type for button is submit, so both buttons were submit buttons */}
           <button type="button" onClick={changePurposeHandler}>
             {isLogin ? 'SIGN UP' : 'LOGIN'} insted
           </button>
