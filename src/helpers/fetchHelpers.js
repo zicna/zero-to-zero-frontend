@@ -16,8 +16,6 @@ export const submitUser = async (user, action) => {
       body: JSON.stringify(user),
     })
 
-    console.log(response)
-
     if (!response.ok) {
       throw Error('something went wrong...')
     }
@@ -27,13 +25,4 @@ export const submitUser = async (user, action) => {
   } catch (error) {
     console.log(error.message)
   }
-}
-
-{
-  //   method: 'POST',
-  //   headers: {
-  //     Accept: 'application/json',
-  //     'Content-Type': 'application/json',
-  //   },
-  //   body: JSON.stringify(userObject),
 }

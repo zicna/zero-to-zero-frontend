@@ -1,16 +1,14 @@
 import React from 'react'
-import { useState, useRef } from 'react'
+import { useState } from 'react'
 
 import { submitUser, SIGNUP, LOGIN } from '../helpers/fetchHelpers'
 
-export default function Auth({setIsLoggedIn}) {
+export default function Auth({ setIsLoggedIn }) {
   const [isLogin, setIsLogin] = useState(true)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
-
-  const form = useRef('')
 
   const passConChangeHandler = (event) => {
     setPasswordConfirmation(event.target.value)
@@ -26,16 +24,15 @@ export default function Auth({setIsLoggedIn}) {
 
   const submitHandler = (event) => {
     event.preventDefault()
-    console.log('helllo from submit hAndler')
     const userObject = {
       user: { email, password, passwordConfirmation },
     }
     if (isLogin) {
       submitUser(userObject, LOGIN)
-      setIsLoggedIn(true)
+      // setIsLoggedIn(true)
     } else {
       submitUser(userObject, SIGNUP)
-      setIsLoggedIn(true)
+      // setIsLoggedIn(true)
     }
 
     setEmail('')
@@ -44,13 +41,12 @@ export default function Auth({setIsLoggedIn}) {
   }
 
   const changePurposeHandler = () => {
-    console.log('hello bree')
     setIsLogin((prevState) => !prevState)
   }
   return (
     <div>
       <h2>{isLogin ? 'LOGIN' : 'SIGNUP'}</h2>
-      <form action="" onSubmit={submitHandler} ref={form}>
+      <form action="" onSubmit={submitHandler}>
         <legend>create new user</legend>
         <div>
           <label htmlFor="">email</label>
