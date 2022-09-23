@@ -1,12 +1,11 @@
 export const URL = 'http//localhost:3000'
-// export const SIGNUP = 'signup'
-// export const LOGIN = 'login'
+export const SIGNUP = 'signup'
+export const LOGIN = 'login'
 
 export const submitUser = async (user, action) => {
-  // debugger
   try {
     console.log(user)
-    const response = await fetch('http//localhost:3000/login', {
+    const response = await fetch(`http://localhost:3000/${action}`, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -28,12 +27,11 @@ export const submitUser = async (user, action) => {
   }
 }
 
-
 {
-//   method: 'POST',
-//   headers: {
-//     Accept: 'application/json',
-//     'Content-Type': 'application/json',
-//   },
-//   body: JSON.stringify(userObject),
+  //   method: 'POST',
+  //   headers: {
+  //     Accept: 'application/json',
+  //     'Content-Type': 'application/json',
+  //   },
+  //   body: JSON.stringify(userObject),
 }

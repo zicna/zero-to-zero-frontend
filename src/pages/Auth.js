@@ -1,10 +1,10 @@
 import React from 'react'
 import { useState, useRef } from 'react'
 
-import { submitUser} from '../helpers/fetchHelpers'
+import { submitUser, SIGNUP, LOGIN } from '../helpers/fetchHelpers'
 
-export const SIGNUP = 'signup'
-export const LOGIN = 'login'
+// export const SIGNUP = 'signup'
+// export const LOGIN = 'login'
 
 export default function Auth() {
   const [isLogin, setIsLogin] = useState(true)
@@ -29,11 +29,11 @@ export default function Auth() {
 
   const submitHandler = (event) => {
     event.preventDefault()
+    console.log('helllo from submit hAndler')
     const userObject = {
       user: { email, password, passwordConfirmation },
     }
     if (isLogin) {
-      // debugger
       submitUser(userObject, LOGIN)
     } else {
       submitUser(userObject, SIGNUP)
@@ -45,6 +45,7 @@ export default function Auth() {
   }
 
   const changePurposeHandler = () => {
+    console.log('hello bree')
     setIsLogin((prevState) => !prevState)
   }
   return (
@@ -73,10 +74,10 @@ export default function Auth() {
           />
         </div>
         <div>
-          <input type="submit" value="SUBMIT" />
+          <button>SUBMIT </button>
         </div>
         <div>
-          <button onClick={changePurposeHandler}>
+          <button type="button" onClick={changePurposeHandler}>
             {isLogin ? 'SIGN UP' : 'LOGIN'} insted
           </button>
         </div>
