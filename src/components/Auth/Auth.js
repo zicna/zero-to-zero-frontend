@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
 import styles from './auth.module.css'
 
@@ -11,6 +11,23 @@ export default function Auth({ setIsLoggedIn }) {
   const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
+  // * validation for email field
+  const [emailTouched, setEmailTouched] = useState(false)
+  const emailRef = useRef('')
+
+  const emaiBlurHandler = () => {
+    setEmailTouched(true)
+  }
+
+  useEffect(() => {
+    if (emailTouched && !emailRef.current.value.includes('@')) {
+      emailRef.current.className = styles.invalid
+    } else {
+      emailRef.current.className = ''
+    }
+  }, [emailTouched, email])
+
+  // ****************************
   const passConChangeHandler = (event) => {
     setPasswordConfirmation(event.target.value)
   }
@@ -56,8 +73,10 @@ export default function Auth({ setIsLoggedIn }) {
             id="email"
             type="email"
             value={email}
+            ref={emailRef}
             onChange={emailChangeHandler}
-            autoFocus
+            onBlur={emaiBlurHandler}
+            // autoFocus
           />
         </div>
         <div>
@@ -78,16 +97,20 @@ export default function Auth({ setIsLoggedIn }) {
             onChange={passConChangeHandler}
           />
         </div>
-        {isLoading ? <p>laoding</p> : <div className={styles.actions}>
-          <button className={styles.submit} type="submit">
-            {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
-          </button>
-          <button type="button" onClick={changePurposeHandler}>
-            {isLogin
-              ? 'create new account'
-              : 'already have account, login insted'}
-          </button>
-        </div>}
+        {isLoading ? (
+          <p>laoding</p>
+        ) : (
+          <div className={styles.actions}>
+            <button className={styles.submit} type="submit">
+              {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
+            </button>
+            <button type="button" onClick={changePurposeHandler}>
+              {isLogin
+                ? 'create new account'
+                : 'already have account, login insted'}
+            </button>
+          </div>
+        )}
       </form>
     </div>
   )

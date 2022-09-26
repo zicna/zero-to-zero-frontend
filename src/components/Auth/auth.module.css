@@ -59,3 +59,9 @@
   font-style: italic;
   text-decoration: underline;
 }
+
+.invalid{
+  background-color: lightcoral;
+  border: 1px solid red;
+  color: red
+}
