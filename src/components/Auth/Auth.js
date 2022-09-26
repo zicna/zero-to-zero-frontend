@@ -5,6 +5,7 @@ import styles from './auth.module.css'
 
 export default function Auth({ setIsLoggedIn }) {
   const [isLogin, setIsLogin] = useState(true)
+  const [isLoading, setIsLoadding] = useState(false)
 
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
@@ -24,6 +25,7 @@ export default function Auth({ setIsLoggedIn }) {
 
   const submitHandler = (event) => {
     event.preventDefault()
+    setIsLoadding(true)
     const userObject = {
       user: { email, password, passwordConfirmation },
     }
@@ -34,6 +36,7 @@ export default function Auth({ setIsLoggedIn }) {
       submitUser(userObject, SIGNUP)
       // setIsLoggedIn(true)
     }
+    setIsLoadding(false)
 
     setEmail('')
     setPassword('')
@@ -75,17 +78,16 @@ export default function Auth({ setIsLoggedIn }) {
             onChange={passConChangeHandler}
           />
         </div>
-        <div className={styles.actions}>
+        {isLoading ? <p>laoding</p> : <div className={styles.actions}>
           <button className={styles.submit} type="submit">
             {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
           </button>
-          {/* default type for button is submit, so both buttons were submit buttons */}
           <button type="button" onClick={changePurposeHandler}>
             {isLogin
               ? 'create new account'
               : 'already have account, login insted'}
           </button>
-        </div>
+        </div>}
       </form>
     </div>
   )

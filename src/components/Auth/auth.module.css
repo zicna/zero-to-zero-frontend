@@ -1,6 +1,6 @@
 .auth {
   background-color: #ddd;
-  outline: 1px solid yellow;
+  border-radius: 8px;
   display: flex;
   justify-content: center;
   text-align: center;
@@ -13,6 +13,11 @@
 .auth label {
   display: block;
   margin-bottom: 0.5rem;
+}
+.auth input {
+  width: 80%;
+  height: 1.2rem;
+  border-radius: 4px;
 }
 
 .auth div {
@@ -49,7 +54,7 @@
 
 .actions button:last-child {
   background-color: #ddd;
-  color: blue;
+  color: #222;
   border: none;
   font-style: italic;
   text-decoration: underline;
