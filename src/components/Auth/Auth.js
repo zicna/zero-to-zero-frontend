@@ -3,7 +3,10 @@ import { useState, useEffect, useRef } from 'react'
 import { useValidator } from '../../hooks/use-validator'
 
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
-import { passwordValidator } from '../../helpers/validatorHelper'
+import {
+  passwordValidator,
+  emailValidator,
+} from '../../helpers/validatorHelper'
 
 import styles from './auth.module.css'
 
@@ -11,27 +14,33 @@ export default function Auth({ setIsLoggedIn }) {
   const [isLogin, setIsLogin] = useState(true)
   const [isLoading, setIsLoadding] = useState(false)
 
-  const [email, setEmail] = useState('')
+  // * validation for email field prior to building custom hook
+  // const [email, setEmail] = useState('')
+  // const [emailTouched, setEmailTouched] = useState(false)
+  // const emailRef = useRef('')
 
-  // * validation for email field
-  const [emailTouched, setEmailTouched] = useState(false)
-  const emailRef = useRef('')
+  // const emaiBlurHandler = () => {
+  //   setEmailTouched(true)
+  // }
 
-  const emaiBlurHandler = () => {
-    setEmailTouched(true)
-  }
-
-  useEffect(() => {
-    if (emailTouched && !emailRef.current.value.includes('@')) {
-      emailRef.current.className = styles.invalid
-      console.log(emailRef)
-    } else {
-      emailRef.current.className = ''
-    }
-  }, [emailTouched, email])
+  // useEffect(() => {
+  //   if (emailTouched && !emailRef.current.value.includes('@')) {
+  //     emailRef.current.className = styles.invalid
+  //     console.log(emailRef)
+  //   } else {
+  //     emailRef.current.className = ''
+  //   }
+  // }, [emailTouched, email])
 
   // ****************************
-  // * set validation for password and passCon using custom hook
+  // * set validation using custom hook
+  const {
+    input: email,
+    setInput: setEmail,
+    inputRef: emailRef,
+    inputBlurHandler: emailBlurHandler,
+    inputChangeHandler: emailChangeHandler,
+  } = useValidator(emailValidator)
   const {
     input: password,
     setInput: setPassword,
@@ -47,11 +56,6 @@ export default function Auth({ setIsLoggedIn }) {
     inputChangeHandler: passwordConfirmationChangeHandler,
   } = useValidator(passwordValidator)
   // ****************************
-
-
-  const emailChangeHandler = (event) => {
-    setEmail(event.target.value)
-  }
 
   const submitHandler = (event) => {
     event.preventDefault()
@@ -88,8 +92,8 @@ export default function Auth({ setIsLoggedIn }) {
             value={email}
             ref={emailRef}
             onChange={emailChangeHandler}
-            onBlur={emaiBlurHandler}
-            // autoFocus
+            onBlur={emailBlurHandler}
+            autoFocus
           />
         </div>
         <div>
