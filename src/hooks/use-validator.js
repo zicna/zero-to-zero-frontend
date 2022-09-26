@@ -15,7 +15,7 @@ export const useValidator = (validator) => {
   }
 
   useEffect(() => {
-      if (inputTouched && inputRef.current.value.trim() === "") {
+      if (inputTouched && !validator(inputRef.current)) {
       inputRef.current.classList.add(styles.invalid)
     } else {
       if (inputRef.current !== '') {

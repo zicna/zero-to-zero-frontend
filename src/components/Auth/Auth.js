@@ -1,7 +1,10 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
 import { useValidator } from '../../hooks/use-validator'
+
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
+import {passwordValidator} from '../../helpers/validatorHelper'
+
 import styles from './auth.module.css'
 
 export default function Auth({ setIsLoggedIn }) {
@@ -37,7 +40,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: passwordRef,
     inputBlurHandler: passwordBlurHandler,
     inputChangeHandler: passwordChangeHandler,
-  } = useValidator()
+  } = useValidator(passwordValidator)
   // ****************************
 
   const passConChangeHandler = (event) => {
