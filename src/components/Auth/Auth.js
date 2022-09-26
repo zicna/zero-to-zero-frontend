@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef } from 'react'
+import { useValidator } from '../../hooks/use-validator'
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
 import styles from './auth.module.css'
 
@@ -8,7 +9,7 @@ export default function Auth({ setIsLoggedIn }) {
   const [isLoading, setIsLoadding] = useState(false)
 
   const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
+  // const [password, setPassword] = useState('')
   const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
   // * validation for email field
@@ -22,18 +23,25 @@ export default function Auth({ setIsLoggedIn }) {
   useEffect(() => {
     if (emailTouched && !emailRef.current.value.includes('@')) {
       emailRef.current.className = styles.invalid
+      console.log(emailRef)
     } else {
       emailRef.current.className = ''
     }
   }, [emailTouched, email])
 
   // ****************************
+  // * set validation for password using custom hook
+  const {
+    input: password,
+    setInput: setPassword,
+    inputRef: passwordRef,
+    inputBlurHandler: passwordBlurHandler,
+    inputChangeHandler: passwordChangeHandler,
+  } = useValidator()
+  // ****************************
+
   const passConChangeHandler = (event) => {
     setPasswordConfirmation(event.target.value)
-  }
-
-  const passwordChangeHandler = (event) => {
-    setPassword(event.target.value)
   }
 
   const emailChangeHandler = (event) => {
@@ -84,8 +92,10 @@ export default function Auth({ setIsLoggedIn }) {
           <input
             id="password"
             type="password"
+            ref={passwordRef}
             value={password}
             onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
           />
         </div>
         <div>
