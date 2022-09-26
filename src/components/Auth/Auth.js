@@ -3,7 +3,7 @@ import { useState, useEffect, useRef } from 'react'
 import { useValidator } from '../../hooks/use-validator'
 
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
-import {passwordValidator} from '../../helpers/validatorHelper'
+import { passwordValidator } from '../../helpers/validatorHelper'
 
 import styles from './auth.module.css'
 
@@ -12,8 +12,6 @@ export default function Auth({ setIsLoggedIn }) {
   const [isLoading, setIsLoadding] = useState(false)
 
   const [email, setEmail] = useState('')
-  // const [password, setPassword] = useState('')
-  const [passwordConfirmation, setPasswordConfirmation] = useState('')
 
   // * validation for email field
   const [emailTouched, setEmailTouched] = useState(false)
@@ -33,7 +31,7 @@ export default function Auth({ setIsLoggedIn }) {
   }, [emailTouched, email])
 
   // ****************************
-  // * set validation for password using custom hook
+  // * set validation for password and passCon using custom hook
   const {
     input: password,
     setInput: setPassword,
@@ -41,11 +39,15 @@ export default function Auth({ setIsLoggedIn }) {
     inputBlurHandler: passwordBlurHandler,
     inputChangeHandler: passwordChangeHandler,
   } = useValidator(passwordValidator)
+  const {
+    input: passwordConfirmation,
+    setInput: setPasswordConfirmation,
+    inputRef: passwordConfirmationRef,
+    inputBlurHandler: passwordConfirmationBlurHandler,
+    inputChangeHandler: passwordConfirmationChangeHandler,
+  } = useValidator(passwordValidator)
   // ****************************
 
-  const passConChangeHandler = (event) => {
-    setPasswordConfirmation(event.target.value)
-  }
 
   const emailChangeHandler = (event) => {
     setEmail(event.target.value)
@@ -106,8 +108,10 @@ export default function Auth({ setIsLoggedIn }) {
           <input
             id="password-confirmation"
             type="password"
+            ref={passwordConfirmationRef}
             value={passwordConfirmation}
-            onChange={passConChangeHandler}
+            onChange={passwordConfirmationChangeHandler}
+            onBlur={passwordConfirmationBlurHandler}
           />
         </div>
         {isLoading ? (
