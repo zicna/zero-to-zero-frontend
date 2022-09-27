@@ -5,6 +5,7 @@ export const useValidator = (validator) => {
   const inputRef = useRef('')
   const [inputTouched, setInputTouched] = useState(false)
   const [input, setInput] = useState('')
+  const [inputValid, setInputValid] = useState(false)
 
   const inputBlurHandler = () => {
     setInputTouched(true)
@@ -12,20 +13,24 @@ export const useValidator = (validator) => {
 
   const inputChangeHandler = (event) => {
     setInput(event.target.value)
+    // ! input touched should been set to true as soon as input is changed...
+    // setInputTouched(true)
   }
 
   useEffect(() => {
-      if (inputTouched && !validator(inputRef.current)) {
+    if (validator(inputRef.current)) {
+      console.log('passed validator')
+      setInputValid(true)
+      inputRef.current.classList.remove(styles.invalid)
+    }
+    if (inputTouched && !validator(inputRef.current)) {
       inputRef.current.classList.add(styles.invalid)
-    } else {
-      if (inputRef.current !== '') {
-        inputRef.current.classList.remove(styles.invalid)
-      }
     }
   }, [inputTouched, input])
 
   return {
     input,
+    inputValid,
     setInput,
     inputRef,
     inputBlurHandler,
