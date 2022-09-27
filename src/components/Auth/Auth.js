@@ -36,6 +36,7 @@ export default function Auth({ setIsLoggedIn }) {
   // * set validation using custom hook
   const {
     input: email,
+    inputValid: emailIsValid,
     setInput: setEmail,
     inputRef: emailRef,
     inputBlurHandler: emailBlurHandler,
@@ -43,6 +44,7 @@ export default function Auth({ setIsLoggedIn }) {
   } = useValidator(emailValidator)
   const {
     input: password,
+    inputValid: passwordIsValid,
     setInput: setPassword,
     inputRef: passwordRef,
     inputBlurHandler: passwordBlurHandler,
@@ -50,12 +52,18 @@ export default function Auth({ setIsLoggedIn }) {
   } = useValidator(passwordValidator)
   const {
     input: passwordConfirmation,
+    inputValid: passwordConfirmationIsValid,
     setInput: setPasswordConfirmation,
     inputRef: passwordConfirmationRef,
     inputBlurHandler: passwordConfirmationBlurHandler,
     inputChangeHandler: passwordConfirmationChangeHandler,
   } = useValidator(passwordValidator)
   // ****************************
+  // ***********over all form validation*****************
+  const btnActionRef = useRef('')
+  const formIsValid =
+    emailIsValid && passwordIsValid && passwordConfirmationIsValid
+  // ****************************************************
 
   const submitHandler = (event) => {
     event.preventDefault()
@@ -93,7 +101,7 @@ export default function Auth({ setIsLoggedIn }) {
             ref={emailRef}
             onChange={emailChangeHandler}
             onBlur={emailBlurHandler}
-            autoFocus
+            // autoFocus
           />
         </div>
         <div>
@@ -122,7 +130,12 @@ export default function Auth({ setIsLoggedIn }) {
           <p>laoding</p>
         ) : (
           <div className={styles.actions}>
-            <button className={styles.submit} type="submit">
+            <button
+              className={styles.submit}
+              type="submit"
+              ref={btnActionRef}
+              disabled={!formIsValid}
+            >
               {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
             </button>
             <button type="button" onClick={changePurposeHandler}>
