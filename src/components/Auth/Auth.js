@@ -41,7 +41,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: emailRef,
     inputBlurHandler: emailBlurHandler,
     inputChangeHandler: emailChangeHandler,
-    inputReset: emailReset
+    inputReset: emailReset,
   } = useValidator(emailValidator)
   const {
     input: password,
@@ -50,7 +50,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: passwordRef,
     inputBlurHandler: passwordBlurHandler,
     inputChangeHandler: passwordChangeHandler,
-    inputReset: passwordReset
+    inputReset: passwordReset,
   } = useValidator(passwordValidator)
   const {
     input: passwordConfirmation,
@@ -59,7 +59,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: passwordConfirmationRef,
     inputBlurHandler: passwordConfirmationBlurHandler,
     inputChangeHandler: passwordConfirmationChangeHandler,
-    inputReset: passwordConfirmationReset
+    inputReset: passwordConfirmationReset,
   } = useValidator(passwordValidator)
   // ****************************
   // ***********over all form validation*****************
@@ -68,27 +68,30 @@ export default function Auth({ setIsLoggedIn }) {
     emailIsValid && passwordIsValid && passwordConfirmationIsValid
   // ****************************************************
 
-  const submitHandler = (event) => {
+  const submitHandler = async (event) => {
     event.preventDefault()
     setIsLoadding(true)
-    const userObject = {
-      user: { email, password, passwordConfirmation },
-    }
-    if (isLogin) {
-      submitUser(userObject, LOGIN)
-      // setIsLoggedIn(true)
-    } else {
-      submitUser(userObject, SIGNUP)
-      // setIsLoggedIn(true)
-    }
-    setIsLoadding(false)
+    try {
+      const userObject = {
+        user: { email, password, passwordConfirmation },
+      }
+      if (isLogin) {
+        await submitUser(userObject, LOGIN)
+        setIsLoggedIn(true)
+        setIsLoadding(false)
+      } else {
+        const returned = await submitUser(userObject, SIGNUP)
+        console.log(returned)
+        setIsLoggedIn(true)
+        setIsLoadding(false)
+      }
 
-    // setEmail('')
-    // setPassword('')
-    // setPasswordConfirmation('')
-    emailReset()
-    passwordReset()
-    passwordConfirmationReset()
+      emailReset()
+      passwordReset()
+      passwordConfirmationReset()
+    } catch (error) {
+      console.log(error.message)
+    }
   }
 
   const changePurposeHandler = () => {
@@ -132,10 +135,9 @@ export default function Auth({ setIsLoggedIn }) {
             onBlur={passwordConfirmationBlurHandler}
           />
         </div>
-        {isLoading ? (
-          <p>laoding</p>
-        ) : (
-          <div className={styles.actions}>
+
+        <div className={styles.actions}>
+          {!isLoading && (
             <button
               className={styles.submit}
               type="submit"
@@ -144,13 +146,14 @@ export default function Auth({ setIsLoggedIn }) {
             >
               {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
             </button>
-            <button type="button" onClick={changePurposeHandler}>
-              {isLogin
-                ? 'create new account'
-                : 'already have account, login insted'}
-            </button>
-          </div>
-        )}
+          )}
+          {isLoading && <p>loading ... </p>}
+          <button type="button" onClick={changePurposeHandler}>
+            {isLogin
+              ? 'create new account'
+              : 'already have account, login insted'}
+          </button>
+        </div>
       </form>
     </div>
   )
