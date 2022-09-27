@@ -60,6 +60,13 @@
   text-decoration: underline;
 }
 
+.actions button:disabled{
+  background-color: #666;
+  color: white;
+  cursor: none;
+
+}
+
 .invalid{
   background-color: lightcoral;
   border: 1px solid red;
