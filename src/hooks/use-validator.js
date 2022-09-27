@@ -28,6 +28,12 @@ export const useValidator = (validator) => {
     }
   }, [inputTouched, input])
 
+  const inputReset = () => {
+    setInputValid(false)
+    setInput("")
+    setInputTouched(false)
+  }
+
   return {
     input,
     inputValid,
@@ -35,5 +41,6 @@ export const useValidator = (validator) => {
     inputRef,
     inputBlurHandler,
     inputChangeHandler,
+    inputReset
   }
 }

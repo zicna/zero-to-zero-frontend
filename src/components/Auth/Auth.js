@@ -41,6 +41,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: emailRef,
     inputBlurHandler: emailBlurHandler,
     inputChangeHandler: emailChangeHandler,
+    inputReset: emailReset
   } = useValidator(emailValidator)
   const {
     input: password,
@@ -49,6 +50,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: passwordRef,
     inputBlurHandler: passwordBlurHandler,
     inputChangeHandler: passwordChangeHandler,
+    inputReset: passwordReset
   } = useValidator(passwordValidator)
   const {
     input: passwordConfirmation,
@@ -57,6 +59,7 @@ export default function Auth({ setIsLoggedIn }) {
     inputRef: passwordConfirmationRef,
     inputBlurHandler: passwordConfirmationBlurHandler,
     inputChangeHandler: passwordConfirmationChangeHandler,
+    inputReset: passwordConfirmationReset
   } = useValidator(passwordValidator)
   // ****************************
   // ***********over all form validation*****************
@@ -80,9 +83,12 @@ export default function Auth({ setIsLoggedIn }) {
     }
     setIsLoadding(false)
 
-    setEmail('')
-    setPassword('')
-    setPasswordConfirmation('')
+    // setEmail('')
+    // setPassword('')
+    // setPasswordConfirmation('')
+    emailReset()
+    passwordReset()
+    passwordConfirmationReset()
   }
 
   const changePurposeHandler = () => {

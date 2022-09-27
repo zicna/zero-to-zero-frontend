@@ -63,7 +63,8 @@
 .actions button:disabled{
   background-color: #666;
   color: white;
-  cursor: none;
+  /* cursor: none; */
+  cursor: auto;
 
 }
 
