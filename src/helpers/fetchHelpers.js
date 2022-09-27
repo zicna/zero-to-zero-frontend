@@ -4,6 +4,10 @@ export const LOGIN = 'login'
 
 export const submitUser = async (user, action) => {
   try {
+    // * adding timer to test UI changes
+    console.log('start timer')
+    await new Promise((resolve) => setTimeout(resolve, 3000))
+    console.log('after 1 second')
     console.log(user)
     // !1. typo on URL=> fetch was sending request to app server with added URL passed to fetch
     // ! POST http://localhost:3001/http//localhost:3000/login 404 (Not Found)
@@ -21,7 +25,9 @@ export const submitUser = async (user, action) => {
     }
 
     const data = await response.json()
+    // debugger
     console.log(data)
+    return data
   } catch (error) {
     console.log(error.message)
   }
