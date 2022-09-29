@@ -72,7 +72,7 @@ export default function Auth() {
       if (response instanceof Error) throw new Error(response.message)
       // * setting token in the context
       authCtx.login(response.data.token)
-      navigate('/home', { replace: true })
+      navigate('/profile', { replace: true })
 
       emailReset()
       passwordReset()
