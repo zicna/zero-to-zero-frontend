@@ -10,7 +10,7 @@ import {
 
 import styles from './auth.module.css'
 
-export default function Auth({ setIsLoggedIn }) {
+export default function Auth() {
   const [isLogin, setIsLogin] = useState(true)
   const [isLoading, setIsLoadding] = useState(false)
 
@@ -77,12 +77,10 @@ export default function Auth({ setIsLoggedIn }) {
       }
       if (isLogin) {
         await submitUser(userObject, LOGIN)
-        setIsLoggedIn(true)
         setIsLoadding(false)
       } else {
         const returned = await submitUser(userObject, SIGNUP)
         console.log(returned)
-        setIsLoggedIn(true)
         setIsLoadding(false)
       }
 

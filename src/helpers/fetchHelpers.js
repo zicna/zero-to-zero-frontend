@@ -25,7 +25,6 @@ export const submitUser = async (user, action) => {
     }
 
     const data = await response.json()
-    // debugger
     console.log(data)
     return data
   } catch (error) {
