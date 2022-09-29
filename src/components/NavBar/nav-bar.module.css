@@ -1,0 +1,19 @@
+.container{
+display: flex;
+justify-content: space-between;
+align-items: center;
+background-color: #999;
+}
+
+.liContainer{
+    display: flex;
+    list-style-type: none;
+}
+
+.liContainer li{
+    margin-left: 1rem;
+}
+
+.liContainer li:last-child{
+    margin-right: 1rem;
+}
