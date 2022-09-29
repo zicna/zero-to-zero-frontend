@@ -1,10 +1,9 @@
-import React, {useContext} from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
 import AuthContext from '../../store/auth-context'
 import styles from './nav-bar.module.css'
 
 export default function NavBar() {
-
   const authCtx = useContext(AuthContext)
   const isLoggedIn = authCtx.isLoggedIn
   return (

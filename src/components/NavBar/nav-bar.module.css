@@ -1,19 +1,32 @@
-.container{
-display: flex;
-justify-content: space-between;
-align-items: center;
-background-color: #999;
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #999;
 }
 
-.liContainer{
-    display: flex;
-    list-style-type: none;
+.liContainer {
+  display: flex;
 }
 
-.liContainer li{
-    margin-left: 1rem;
+.liContainer li {
+  margin-left: 1rem;
+  list-style-type: none;
 }
 
-.liContainer li:last-child{
-    margin-right: 1rem;
+.liContainer li:last-child {
+  margin-right: 1rem;
 }
+
+.liContainer a {
+    text-decoration: none;
+    color: black;
+    font-weight: 500;
+}
+
+.liContainer a[class="active"]{
+    color: green;
+    font-weight: 700;
+}
+
+
