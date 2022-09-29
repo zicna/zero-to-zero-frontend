@@ -19,9 +19,14 @@ export default function NavBar() {
           </li>
         )}
         {isLoggedIn && (
-          <li>
-            <NavLink to="/logout">LOGOUT</NavLink>
-          </li>
+          <>
+            <li>
+              <NavLink to="/profile">PROFILE</NavLink>
+            </li>
+            <li>
+              <NavLink to="/logout">LOGOUT</NavLink>
+            </li>
+          </>
         )}
       </ul>
     </div>
