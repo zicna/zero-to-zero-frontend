@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState, useEffect, useRef, useContext } from 'react'
+import { useNavigate } from 'react-router'
 import { useValidator } from '../../hooks/use-validator'
 
 import AuthContext from '../../store/auth-context'
@@ -16,6 +17,7 @@ export default function Auth() {
   const [tryingToLoggin, setTryingToLoggin] = useState(true)
   const [isLoading, setIsLoadding] = useState(false)
   const authCtx = useContext(AuthContext)
+  const navigate = useNavigate()
 
   // * set validation using custom hook
   const {
@@ -70,6 +72,7 @@ export default function Auth() {
       if (response instanceof Error) throw new Error(response.message)
       // * setting token in the context
       authCtx.login(response.data.token)
+      navigate('/home', { replace: true })
 
       emailReset()
       passwordReset()
