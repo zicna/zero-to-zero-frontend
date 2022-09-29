@@ -1,6 +1,8 @@
 import React from 'react'
-import { useState, useEffect, useRef } from 'react'
+import { useState, useEffect, useRef, useContext } from 'react'
 import { useValidator } from '../../hooks/use-validator'
+
+import AuthContext from '../../store/auth-context'
 
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
 import {
@@ -11,8 +13,9 @@ import {
 import styles from './auth.module.css'
 
 export default function Auth() {
-  const [isLogin, setIsLogin] = useState(true)
+  const [tryingToLoggin, setTryingToLoggin] = useState(true)
   const [isLoading, setIsLoadding] = useState(false)
+  const authCtx = useContext(AuthContext)
 
   // * validation for email field prior to building custom hook
   // const [email, setEmail] = useState('')
@@ -71,33 +74,37 @@ export default function Auth() {
   const submitHandler = async (event) => {
     event.preventDefault()
     setIsLoadding(true)
+    let response = null
     try {
       const userObject = {
         user: { email, password, passwordConfirmation },
       }
-      if (isLogin) {
-        await submitUser(userObject, LOGIN)
-        setIsLoadding(false)
+      if (tryingToLoggin) {
+        response = await submitUser(userObject, LOGIN)
       } else {
-        const returned = await submitUser(userObject, SIGNUP)
-        console.log(returned)
-        setIsLoadding(false)
+        response = await submitUser(userObject, SIGNUP)
       }
+      setIsLoadding(false)
+      // * guard clause in case submitUser returns error
+      if (response instanceof Error) throw new Error(response.message)
+      // * setting token in the context
+      authCtx.login(response.data.token)
 
       emailReset()
       passwordReset()
       passwordConfirmationReset()
     } catch (error) {
-      console.log(error.message)
+      alert(error.message)
+      // console.log(error.message)
     }
   }
 
   const changePurposeHandler = () => {
-    setIsLogin((prevState) => !prevState)
+    setTryingToLoggin((prevState) => !prevState)
   }
   return (
     <div className={styles.auth}>
-      <h2>{isLogin ? 'LOGIN' : 'SIGNUP'}</h2>
+      <h2>{tryingToLoggin ? 'LOGIN' : 'SIGNUP'}</h2>
       <form onSubmit={submitHandler}>
         <div>
           <label htmlFor="email">email</label>
@@ -142,12 +149,12 @@ export default function Auth() {
               ref={btnActionRef}
               disabled={!formIsValid}
             >
-              {isLogin ? 'LOGIN' : 'SIGNUP'}{' '}
+              {tryingToLoggin ? 'LOGIN' : 'SIGNUP'}{' '}
             </button>
           )}
           {isLoading && <p>loading ... </p>}
           <button type="button" onClick={changePurposeHandler}>
-            {isLogin
+            {tryingToLoggin
               ? 'create new account'
               : 'already have account, login insted'}
           </button>
