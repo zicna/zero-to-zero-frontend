@@ -17,25 +17,6 @@ export default function Auth() {
   const [isLoading, setIsLoadding] = useState(false)
   const authCtx = useContext(AuthContext)
 
-  // * validation for email field prior to building custom hook
-  // const [email, setEmail] = useState('')
-  // const [emailTouched, setEmailTouched] = useState(false)
-  // const emailRef = useRef('')
-
-  // const emaiBlurHandler = () => {
-  //   setEmailTouched(true)
-  // }
-
-  // useEffect(() => {
-  //   if (emailTouched && !emailRef.current.value.includes('@')) {
-  //     emailRef.current.className = styles.invalid
-  //     console.log(emailRef)
-  //   } else {
-  //     emailRef.current.className = ''
-  //   }
-  // }, [emailTouched, email])
-
-  // ****************************
   // * set validation using custom hook
   const {
     input: email,
@@ -85,7 +66,7 @@ export default function Auth() {
         response = await submitUser(userObject, SIGNUP)
       }
       setIsLoadding(false)
-      // * guard clause in case submitUser returns error
+      // * guard clause in case submitUser helper returns error
       if (response instanceof Error) throw new Error(response.message)
       // * setting token in the context
       authCtx.login(response.data.token)
@@ -95,7 +76,6 @@ export default function Auth() {
       passwordConfirmationReset()
     } catch (error) {
       alert(error.message)
-      // console.log(error.message)
     }
   }
 
@@ -163,3 +143,23 @@ export default function Auth() {
     </div>
   )
 }
+
+// * validation for email field prior to building custom hook
+// const [email, setEmail] = useState('')
+// const [emailTouched, setEmailTouched] = useState(false)
+// const emailRef = useRef('')
+
+// const emaiBlurHandler = () => {
+//   setEmailTouched(true)
+// }
+
+// useEffect(() => {
+//   if (emailTouched && !emailRef.current.value.includes('@')) {
+//     emailRef.current.className = styles.invalid
+//     console.log(emailRef)
+//   } else {
+//     emailRef.current.className = ''
+//   }
+// }, [emailTouched, email])
+
+// ****************************
