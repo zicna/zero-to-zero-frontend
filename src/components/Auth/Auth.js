@@ -2,7 +2,8 @@ import React from 'react'
 import { useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { useValidator } from '../../hooks/use-validator'
-
+import { useDispatch } from 'react-redux'
+import { CLEAR } from '../../store/redux-action'
 import AuthContext from '../../store/auth-context'
 
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
@@ -18,6 +19,7 @@ export default function Auth() {
   const [isLoading, setIsLoadding] = useState(false)
   const authCtx = useContext(AuthContext)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // * set validation using custom hook
   const {
@@ -58,20 +60,30 @@ export default function Auth() {
     event.preventDefault()
     setIsLoadding(true)
     let response = null
+    let action = ''
     try {
       const userObject = {
         user: { email, password, passwordConfirmation },
       }
       if (tryingToLoggin) {
-        response = await submitUser(userObject, LOGIN)
+        action = LOGIN
+        response = await submitUser(userObject, action)
       } else {
-        response = await submitUser(userObject, SIGNUP)
+        action = SIGNUP
+        response = await submitUser(userObject, action)
       }
       setIsLoadding(false)
       // * guard clause in case submitUser helper returns error
       if (response instanceof Error) throw new Error(response.message)
       // * setting token in the context
       authCtx.login(response.data.token)
+      // *connect with redux to set message
+      dispatch({ type: action })
+      // ! this should be resolved with redux thunk
+      setTimeout(() => {
+        dispatch({ type: CLEAR })
+      }, 3000)
+      // * redirect to profile page
       navigate('/profile', { replace: true })
 
       emailReset()
