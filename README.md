@@ -1,4 +1,18 @@
-# Getting Started with Create React App
+## data handling
+
+- **Context and useContex**
+  - for low frequency changing data
+  - handling login/signup and logout
+  - storing JWT token
+- Redux (no redux toolkit, maybe later)
+  - for higher frequency changing data
+  - handling CRUD actions for questions, answers, languages, levels
+
+## new things used 
+- Todo Tree, VS Code extension
+   - how to use it...
+
+<!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
@@ -67,4 +81,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 ### `npm run build` fails to minify
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify) -->
