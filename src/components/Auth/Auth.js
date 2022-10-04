@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { useValidator } from '../../hooks/use-validator'
 import { useDispatch } from 'react-redux'
-import { CLEAR } from '../../store/redux-action'
+import { CLEAR, LOADDATA } from '../../store/redux-action'
 import AuthContext from '../../store/auth-context'
 
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
@@ -79,6 +79,9 @@ export default function Auth() {
       authCtx.login(response.data.token)
       // *connect with redux to set message
       dispatch({ type: action })
+      // TODO: connect with redux to set all data coming from backend to app store
+      dispatch({type: LOADDATA})
+      console.log(response)
       // ! this should be resolved with redux thunk
       setTimeout(() => {
         dispatch({ type: CLEAR })

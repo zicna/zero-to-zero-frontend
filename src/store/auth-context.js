@@ -23,7 +23,11 @@ export const AuthContextProvider = (props) => {
     login: loginHandler,
     logout: logoutHandler,
   }
-  return <AuthContext.Provider value={contextValue}>{props.children}</AuthContext.Provider>
+  return (
+    <AuthContext.Provider value={contextValue}>
+      {props.children}
+    </AuthContext.Provider>
+  )
 }
 
 export default AuthContext

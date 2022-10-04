@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 
 const MessageContainer = () => {
   const message = useSelector((state) => {
+    debugger
     return state.message
   })
 
