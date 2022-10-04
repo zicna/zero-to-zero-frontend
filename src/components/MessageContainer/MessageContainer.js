@@ -3,12 +3,9 @@ import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
 
 const MessageContainer = () => {
-  const message = useSelector((state) => {
-    debugger
-    return state.message
-  })
+  const message = useSelector((state) => state.message)
 
-  return <div className={styles.msgContainer}>{message}</div>
+  return <div className={styles.msgContainer}>{message.message}</div>
 }
 
 export default MessageContainer

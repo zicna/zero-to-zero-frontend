@@ -3,7 +3,7 @@ import { useState, useEffect, useRef, useContext } from 'react'
 import { useNavigate } from 'react-router'
 import { useValidator } from '../../hooks/use-validator'
 import { useDispatch } from 'react-redux'
-import { CLEAR, LOADDATA } from '../../store/redux-action'
+import { CLEAR, LOAD } from '../../store/redux-action'
 import AuthContext from '../../store/auth-context'
 
 import { submitUser, SIGNUP, LOGIN } from '../../helpers/fetchHelpers'
@@ -76,12 +76,11 @@ export default function Auth() {
       // * guard clause in case submitUser helper returns error
       if (response instanceof Error) throw new Error(response.message)
       // * setting token in the context
-      authCtx.login(response.data.token)
-      // *connect with redux to set message
-      dispatch({ type: action })
+      const {data} = response
+      authCtx.login(data.token)
       // TODO: connect with redux to set all data coming from backend to app store
-      dispatch({type: LOADDATA})
-      console.log(response)
+      // * we are laoding all data with one action through multiple reducer functions
+      dispatch({ type: LOAD, payload: data })
       // ! this should be resolved with redux thunk
       setTimeout(() => {
         dispatch({ type: CLEAR })
