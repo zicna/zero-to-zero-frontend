@@ -1,22 +1,31 @@
-import React from 'react'
+// import React from 'react'
 import { createStore } from 'redux'
-import { LOGIN, LOGOUT, SIGNUP, CLEAR } from './redux-action'
+import reducer from './reducers/index'
+// import { LOGIN, LOGOUT, SIGNUP, CLEAR } from './redux-action'
 
-const reducerFunction = (state = { message: '' }, action) => {
-  switch (action.type) {
-    case LOGIN:
-      return { message: 'successfuly loged in' }
-    case LOGOUT:
-      return { message: 'successfuly loged out' }
-    case SIGNUP:
-      return { message: 'new user created' }
-    case CLEAR:
-      return { message: '' }
-    default:
-      return state
-  }
-}
+// const initState = {
+//   message: '',
+//   user: {},
+//   languages: [],
+//   levels: [],
+//   questions: []
+// }
 
-const store = createStore(reducerFunction)
+// const reducerFunction = (state =initState, action) => {
+//   switch (action.type) {
+//     case LOGIN:
+//       return { ...initState, message: 'successfuly loged in' }
+//     case LOGOUT:
+//       return { ...initState, message: 'successfuly loged out' }
+//     case SIGNUP:
+//       return { ...initState, message: 'new user created' }
+//     case CLEAR:
+//       return { ...initState, message: '' }
+//     default:
+//       return state
+//   }
+// }
+
+const store = createStore(reducer)
 
 export default store
