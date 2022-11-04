@@ -1,4 +1,4 @@
-import { LOGIN, LOGOUT, SIGNUP, CLEAR, LOAD } from '../redux-action'
+import { LOGIN, LOGOUT, SIGNUP, CLEAR, LOAD, MUST_ACTION } from '../redux-action'
 
 const messageReducer = (state = '', action) => {
   switch (action.type) {
@@ -12,6 +12,8 @@ const messageReducer = (state = '', action) => {
       return { message: '' }
     case LOAD:
         return {message: action.payload.message}
+    case MUST_ACTION:
+      return {message: "must be authorized to access, please log or sign in. Thank you!"}
     default:
       return state
   }
