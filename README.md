@@ -12,6 +12,13 @@
 - Todo Tree, VS Code extension
    - how to use it...
 
+## Problems
+
+### Protected URL routes
+
+- (so far) we are only protecting NavBar links from showing based of user signed in
+- we need to protect URL bar if user decides to manualy type url that we should not have access to.
+
 <!-- # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
