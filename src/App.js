@@ -1,7 +1,7 @@
 import React from 'react'
 import MessageContainer from './components/MessageContainer/MessageContainer'
 import NavBar from './components/NavBar/NavBar'
-import MainRoutesContainer from './routes container/MainRoutesContainer'
+import MainRoutesContainer from './routesContainer/MainRoutesContainer'
 
 function App() {
   return (
