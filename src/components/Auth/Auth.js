@@ -63,7 +63,7 @@ export default function Auth() {
     let action = ''
     try {
       const userObject = {
-        user: { email, password, passwordConfirmation },
+        user: { email, password, password_confirmation: passwordConfirmation },
       }
       if (tryingToLoggin) {
         action = LOGIN

@@ -12,12 +12,16 @@
 - Todo Tree, VS Code extension
    - how to use it...
 
-## Problems
+## <h3 style="color:red; text-align:center">Problems</h3 >
 
-### Protected URL routes
+### 1.Protected URL routes
 
-- (so far) we are only protecting NavBar links from showing based of user signed in
-- we need to protect URL bar if user decides to manualy type url that we should not have access to.
+**Base Ground** (so far) we are only protecting NavBar links from showing based of user signed in. We need to protect URL bar if user decides to manualy type url that we should not have access to.
+
+**Solution** create wrapper component that will conditionaly return children (from props) or navigate to "/home" page
+also display new message in message container
+
+### 2.
 
 <!-- # Getting Started with Create React App
 

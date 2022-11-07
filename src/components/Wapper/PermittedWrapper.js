@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { Navigate } from 'react-router'
 // import Home from "../../pages/Home";
 import AuthContext from '../../store/auth-context'
@@ -12,20 +12,23 @@ const PermittedWrapepr = ({ children }) => {
 
   const dispatch = useDispatch()
 
+  const stateOne = useSelector((state) => {
+    return state
+  })
   // * guard clause to check if user is logged in
   // ! problem: not just to return Home component but also to redirect to "/home" URL
   // if(!isLoggedIn) return < Home/>
   // * solution: redirect to "/auth" path and display message to access "/profile" you must be "signed in" or "logged in"
   if (!isLoggedIn) {
-    dispatch({type: MUST_ACTION})
+    dispatch({ type: MUST_ACTION })
     // ! this should be resolved with redux thunk
     setTimeout(() => {
-        dispatch({ type: CLEAR })
-      }, 3000)
+      dispatch({ type: CLEAR })
+    }, 3000)
     return <Navigate to="/auth" />
   }
 
-  return { children }
+  return children
 }
 
 export default PermittedWrapepr
